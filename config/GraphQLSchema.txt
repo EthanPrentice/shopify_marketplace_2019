@@ -1,0 +1,32 @@
+type Query {
+  getCart(cartId: Int!): Cart
+  allProducts: [Product]!
+}
+
+type Mutation {
+  createCart: Cart
+  addProductToCart(cartId: Int! productId: Int!, qty: Int!): Cart
+  rmvProductFromCart(cartId: Int!, productId: Int!, qty: Int!): Cart
+  clearCart(cartId: Int!): Cart
+  checkoutCart(cartId: Int!): Cart
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Int!
+  inventory_count: Int!
+
+  qty: Int                # used when product is in cart
+  subtotal: Int           # used when product is in cart
+}
+
+type Cart {
+  id: Int!
+  products: [Product]!
+  totalPrice: Int!
+}
+
+type Error {
+  errors: [String!]!
+}

@@ -1,0 +1,22 @@
+{
+  "name": "marketplace",
+  "version": "1.0.0",
+  "description": "Shopify Backend Developer Summer 2019 Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "Ethan Prentice",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "http": "0.0.0",
+    "mysql": "^2.16.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "tui-jsdoc-template": "^1.2.2"
+  }
+}

@@ -1,0 +1,96 @@
+## QUERIES ##
+
+# query {
+#   getCart(cartId: 1) {
+#     id
+#     products {
+#      id,
+#      name,
+#      price,
+#      qty,
+#      subtotal
+#     }
+#   }
+# }
+
+# query {
+#   allProducts {
+#     id,
+#     name,
+#     price,
+#     qty,
+#     subtotal
+#   }
+# }
+
+# query {
+#   getProduct(productId: 1) {
+#     id,
+#     name,
+#     price,
+#     qty,
+#     subtotal
+#   }
+# }
+
+
+## MUTATIONS ##
+
+# mutation {
+#   createCart {
+#     id
+#   }
+# }
+
+# mutation {
+#   addProductToCart(
+#     cartId: 1
+#   	productId: 2
+#     qty: 1
+#   ) {
+#     id,
+#     products {
+#       id,
+#       name,
+#       price,
+#       qty,
+#       subtotal,
+#       inventory_count
+#     }
+#   }
+# }
+
+# mutation {
+#   rmvProductFromCart(
+#     cartId: 1
+#   	productId: 2
+#     qty: 1
+#   ) {
+#     id,
+#     products {
+#       id,
+#       name,
+#       price,
+#       qty,
+#       subtotal,
+#       inventory_count
+#     }
+#   }
+# }
+
+# mutation {
+#   clearCart(cartId: 1) {
+#     id,
+#     products {
+#       id,
+#       name,
+#       price,
+#       qty,
+#       subtotal
+#     }
+#   }
+# }
+
+# mutation {
+# 	checkoutCart(cartId: 1)
+# }

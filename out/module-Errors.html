@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module: Errors | Shopify Marketplace</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px; height: 150px">
+        
+            <a href="https://github.com/EthanPrentice" rel="noopener noreferrer" target="_blank">
+                <img src="http://pluspng.com/img-png/shopify-logo-png--185.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Shopify Marketplace</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Cart.html">Cart</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Cart_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Cart.html#.addProduct">addProduct</a></li><li><a href="module-Cart.html#.cartExists">cartExists</a></li><li><a href="module-Cart.html#.checkout">checkout</a></li><li><a href="module-Cart.html#.clear">clear</a></li><li><a href="module-Cart.html#.create">create</a></li><li><a href="module-Cart.html#.decreaseQty">decreaseQty</a></li><li><a href="module-Cart.html#.delete">delete</a></li><li><a href="module-Cart.html#.get">get</a></li><li><a href="module-Cart.html#.increaseQty">increaseQty</a></li><li><a href="module-Cart.html#.productExistsInCart">productExistsInCart</a></li><li><a href="module-Cart.html#.rmvProduct">rmvProduct</a></li></ul></div></li><li><a href="module-Errors.html">Errors</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Errors_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Errors.html#.errorNames">errorNames</a></li><li><a href="module-Errors.html#.errorTypes">errorTypes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Errors.html#.getError">getError</a></li></ul></div></li><li><a href="module-Product.html">Product</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Product_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Product.html#.decreaseInventory">decreaseInventory</a></li><li><a href="module-Product.html#.getAllProducts">getAllProducts</a></li><li><a href="module-Product.html#.getProductById">getProductById</a></li><li><a href="module-Product.html#.getProductsById">getProductsById</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#root">root</a></li><li><a href="global.html#schema">schema</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Errors</h2>
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description">Holds error names and status codes for consistency</div>
+            
+
+            
+                
+
+<dt>
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Ethan Prentice</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+
+<dt>
+<h4 class="name" id=".errorNames">
+    <span class="type-signature"><span class="icon green">static</span> </span>errorNames<span class="type-signature"></span>
+    
+    <div class="container-source members">
+        <code><a href="modules_errors.js.html">modules/errors.js</a></code>,
+        <code><a href="modules_errors.js.html#line10">line 10</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>EXCEEDS_INVENTORY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a product in the cart's quantity exceeds the current inventory</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CART_DOES_NOT_EXIST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a cart that doesn't exist is attempted to be retrieved</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PRODUCT_DOES_NOT_EXIST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a product that doesn't exist is attempted to be retrieved</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>INVALID_PARAMS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a method is given insufficient arguements</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        
+            
+
+<dt>
+<h4 class="name" id=".errorTypes">
+    <span class="type-signature"><span class="icon green">static</span> </span>errorTypes<span class="type-signature"></span>
+    
+    <div class="container-source members">
+        <code><a href="modules_errors.js.html">modules/errors.js</a></code>,
+        <code><a href="modules_errors.js.html#line36">line 36</a></code>
+    </div>
+    
+</h4>
+
+
+</dt>
+<dd>
+    
+
+    <!--
+    
+    -->
+
+    
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>EXCEEDS_INVENTORY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a product in the cart's quantity exceeds the current inventory (verbose)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>CART_DOES_NOT_EXIST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a cart that doesn't exist is attempted to be retrievedy (verbose)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>PRODUCT_DOES_NOT_EXIST</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a product that doesn't exist is attempted to be retrievedy (verbose)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>INVALID_PARAMS</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Referenced when a method is given insufficient arguements</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id=".getError">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>getError<span class="signature">(errorName)</span><span class="type-signature"> &rarr; {object|string}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="modules_errors.js.html">modules/errors.js</a></code>,
+                <code><a href="modules_errors.js.html#line78">line 78</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Retrieved data from errorTypes based on given errorName
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>errorName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">name of error to get more information on</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">object</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+
+
+- more verbose info if available, otherwise return errorName
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <!-- <img class="logo" src="http://pluspng.com/img-png/shopify-logo-png--185.png" style="width: 150px; height: 150px"> -->
+    <div class="footer-text">Ethan Prentice - Carleton University</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'module:Errors_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

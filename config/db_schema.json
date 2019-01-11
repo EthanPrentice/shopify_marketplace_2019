@@ -1,0 +1,24 @@
+{
+  "db_name": "marketplace",
+  "_comment": "CURRENTLY UNUSED, If implemented in actual code, would make refactoring db easier",
+  "tables": {
+    "carts": {
+      "TABLE_NAME": "Carts",
+      "id": "id"
+    },
+    "cart_products": {
+      "TABLE_NAME": "Cart_Products",
+      "id": "id",
+      "cartId": "cartId",
+      "productId": "productId",
+      "qty": "quantity"
+    },
+    "products": {
+      "TABLE_NAME": "Products",
+      "id": "id",
+      "name": "name",
+      "price": "price",
+      "inv": "inventory_count"
+    }
+  }
+}

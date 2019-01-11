@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: errors.js | Shopify Marketplace</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px; height: 150px">
+        
+            <a href="https://github.com/EthanPrentice" rel="noopener noreferrer" target="_blank">
+                <img src="http://pluspng.com/img-png/shopify-logo-png--185.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Shopify Marketplace</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Cart.html">Cart</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Cart_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Cart.html#.addProduct">addProduct</a></li><li><a href="module-Cart.html#.cartExists">cartExists</a></li><li><a href="module-Cart.html#.checkout">checkout</a></li><li><a href="module-Cart.html#.clear">clear</a></li><li><a href="module-Cart.html#.create">create</a></li><li><a href="module-Cart.html#.decreaseQty">decreaseQty</a></li><li><a href="module-Cart.html#.get">get</a></li><li><a href="module-Cart.html#.increaseQty">increaseQty</a></li><li><a href="module-Cart.html#.productExistsInCart">productExistsInCart</a></li><li><a href="module-Cart.html#.rmvProduct">rmvProduct</a></li></ul></div></li><li><a href="module-Errors.html">Errors</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Errors_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Errors.html#.errorNames">errorNames</a></li><li><a href="module-Errors.html#.errorTypes">errorTypes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Errors.html#.getError">getError</a></li></ul></div></li><li><a href="module-Product.html">Product</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Product_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Product.html#.decreaseInventory">decreaseInventory</a></li><li><a href="module-Product.html#.getAllProducts">getAllProducts</a></li><li><a href="module-Product.html#.getProductById">getProductById</a></li><li><a href="module-Product.html#.getProductsById">getProductsById</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#root">root</a></li><li><a href="global.html#schema">schema</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Ethan Prentice
+ * @fileoverview Holds error names and status codes for consistency
+ * @module Errors
+ */
+
+/**
+ * @enum Contains error messages
+ */
+module.exports.errorNames = {
+  /**
+   * @type {string}
+   * @desc Referenced when a product in the cart's quantity exceeds the current inventory
+   */
+  EXCEEDS_INVENTORY:      "EXCEEDS_INVENTORY",
+  /**
+   * @type {string}
+   * @desc Referenced when a cart that doesn't exist is attempted to be retrieved
+   */
+  CART_DOES_NOT_EXIST:    "CART_DOES_NOT_EXIST",
+  /**
+   * @type {string}
+   * Referenced when a product that doesn't exist is attempted to be retrieved
+   */
+  PRODUCT_DOES_NOT_EXIST: "PRODUCT_DOES_NOT_EXIST"
+}
+
+/**
+ * @enum Contains more information about errors
+ */
+module.exports.errorTypes = {
+  /**
+   * @type {object}
+   * @desc Referenced when a product in the cart's quantity exceeds the current inventory (verbose)
+   */
+  EXCEEDS_INVENTORY: {
+    message: "EXCEEDS_INVENTORY",
+    statusCode: 418
+  },
+  /**
+   * @type {object}
+   * @desc Referenced when a cart that doesn't exist is attempted to be retrievedy (verbose)
+   */
+  CART_DOES_NOT_EXIST: {
+    message: "CART_DOES_NOT_EXIST",
+    statusCode: 418
+  },
+  /**
+   * @type {object}
+   * Referenced when a product that doesn't exist is attempted to be retrievedy (verbose)
+   */
+  PRODUCT_DOES_NOT_EXIST: {
+    message: "PRODUCT_DOES_NOT_EXIST",
+    statusCode: 418
+  }
+}
+
+/**
+ * Retrieved data from errorTypes based on given errorName
+ *
+ * @param {string} errorName - name of error to get more information on
+ *
+ * @return {object|string} more verbose info if available, otherwise return errorName
+ */
+module.exports.getError = (errorName) => {
+  if (module.exports.errorTypes[errorName] == undefined)
+    return errorName
+  else
+    return module.exports.errorTypes[errorName]
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="http://pluspng.com/img-png/shopify-logo-png--185.png" style="width: 150px; height: 150px">
+    <div class="footer-text">Ethan Prentice - Carleton University</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

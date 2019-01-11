@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: modules/cart.js | Shopify Marketplace</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px; height: 150px">
+        
+            <a href="https://github.com/EthanPrentice" rel="noopener noreferrer" target="_blank">
+                <img src="http://pluspng.com/img-png/shopify-logo-png--185.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Shopify Marketplace</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Cart.html">Cart</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Cart_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Cart.html#.addProduct">addProduct</a></li><li><a href="module-Cart.html#.cartExists">cartExists</a></li><li><a href="module-Cart.html#.checkout">checkout</a></li><li><a href="module-Cart.html#.clear">clear</a></li><li><a href="module-Cart.html#.create">create</a></li><li><a href="module-Cart.html#.decreaseQty">decreaseQty</a></li><li><a href="module-Cart.html#.delete">delete</a></li><li><a href="module-Cart.html#.get">get</a></li><li><a href="module-Cart.html#.increaseQty">increaseQty</a></li><li><a href="module-Cart.html#.productExistsInCart">productExistsInCart</a></li><li><a href="module-Cart.html#.rmvProduct">rmvProduct</a></li></ul></div></li><li><a href="module-Errors.html">Errors</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Errors_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Errors.html#.errorNames">errorNames</a></li><li><a href="module-Errors.html#.errorTypes">errorTypes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Errors.html#.getError">getError</a></li></ul></div></li><li><a href="module-Product.html">Product</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Product_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Product.html#.decreaseInventory">decreaseInventory</a></li><li><a href="module-Product.html#.getAllProducts">getAllProducts</a></li><li><a href="module-Product.html#.getProductById">getProductById</a></li><li><a href="module-Product.html#.getProductsById">getProductsById</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#root">root</a></li><li><a href="global.html#schema">schema</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Ethan Prentice
+ * @fileoverview Manages the carts and cart_products, translates from the database to GraphQL and vice-versa
+ * @module Cart
+ */
+
+const mysql       = require('mysql')
+const errorNames  = require('./errors.js').errorNames
+const Product     = require('./product.js')
+
+const isNullOrUndefined = (val) => {
+  if (val instanceof Array) {
+    for (let i=0; i&lt;val.length; i++)
+      if (val == undefined || val == null)
+        return true
+  }
+  else
+    return val == undefined || val == null
+}
+
+var Cart = module.exports
+
+/**
+ * Checks if a cart exists in the database.
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection.
+ * @param {!int}    args.cartId - ID of the cart to be validated.
+ *
+ * @returns {Promise&lt;!boolean>} True if cart exists, else false.
+ */
+module.exports.cartExists = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "SELECT * FROM cart WHERE id = ?"
+  var sqlArgs = [args.cartId]
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function (err, result, fields) {
+      if (err)
+        return reject(err)
+
+      if (result != undefined &amp;&amp; result.length != 0)
+        resolve(true)
+      else
+        resolve(false)
+    })
+  })
+}
+
+/**
+ * Retrieves a cart from the database.
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection.
+ * @param {!int}    args.cartId - ID of the cart to be retrieved.
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {CART_DOES_NOT_EXIST} Throws an error if cart cannot be found
+ * @returns {Promise&lt;Cart>} Cart with ID cartID, if does not exist throws error.
+ */
+module.exports.get = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId]))
+    throw errorNames.INVALID_PARAMS
+
+  var cart = { id: args.cartId, products: [], totalPrice: 0}
+  var sql = "SELECT cp.productId AS id, cp.qty, p.name, p.price, p.inventory_count " +
+            "FROM cart_product cp " +
+            "INNER JOIN product p ON cp.productId = p.id " +
+            "WHERE cp.cartId = ?"
+  var sqlArgs = [cart.id]
+
+  if (!(await Cart.cartExists(args)))
+    throw errorNames.CART_DOES_NOT_EXIST
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function (err, result, fields) {
+      if (err) return reject(err)
+
+      for (let i=0; i&lt;result.length; i++) {
+        let r = result[i]
+        r.subtotal = Number((r.qty * r.price).toFixed(2))
+        cart.totalPrice += r.subtotal
+      }
+
+      // convert to have a maximum of two decimal places
+      cart.totalPrice = Number(cart.totalPrice.toFixed(2))
+
+      cart.products = result
+
+      resolve(cart)
+    })
+  })
+
+}
+
+/**
+ * Inserts a new, empty cart into the database
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @returns {Promise&lt;Cart>} Recently created cart
+ */
+module.exports.create = async(args) => {
+  if (isNullOrUndefined([args, args.conn]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "INSERT INTO cart () VALUES ()"
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, function(err, result) {
+      if (err) return reject(err)
+
+      // resolve with default cart with auto-incremented id
+      resolve({ id: result.insertId, products: [], totalPrice: 0})
+    })
+  })
+}
+
+/**
+ * Checks if a product is already in the cart
+ * Used to decide whether to create a new entry when increasing quantities
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ * @param {!int}    args.productId - ID of the product to check
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @returns {Promise&lt;Product>|Promise&lt;boolean>} if the product exists, return it.  Else return false
+ */
+module.exports.productExistsInCart = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId, args.productId]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "SELECT * FROM cart_product WHERE cartId = ? AND productId = ?"
+  var sqlArgs = [args.cartId, args.productId]
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+
+      if (result != undefined &amp;&amp; result.length != 0)
+        resolve(result[0])
+      else
+        resolve(false)
+    })
+  })
+}
+
+/**
+ * Increases the quantity of a product already contained in a cart
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ * @param {!int}    args.productId - ID of the product to check
+ * @param {!int}    args.qty - The amount to offset the current quantity by (use decreaseQty instead of negatives)
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {PRODUCT_DOES_NOT_EXIST} Throws an error if product cannot be found
+ * @returns {Promise&lt;Cart>} Returns the cart that contains the modified product quantity
+ */
+module.exports.increaseQty = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId, args.productId]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "UPDATE cart_product SET qty = qty + ? WHERE cartId = ? AND productId = ?"
+  var sqlArgs = [args.qty, args.cartId, args.productId]
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+
+      if (result == undefined || result.length == 0)
+        throw errorNames.PRODUCT_DOES_NOT_EXIST
+      else
+        resolve(Cart.get(args))
+    })
+  })
+}
+
+/**
+ * Decreases the quantity of a product already contained in a cart
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ * @param {!int}    args.productId - ID of the product to check
+ * @param {!int}    args.qty - The amount to offset the current quantity by (use increaseQty instead of negatives)
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {PRODUCT_DOES_NOT_EXIST} Throws an error if product cannot be found
+ * @returns {Promise&lt;Cart>} Returns the cart that contains the modified product quantity
+ */
+module.exports.decreaseQty = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId, args.productId, args.qty]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "UPDATE cart_product SET qty = qty - ? WHERE cartId = ? AND productId = ?"
+  var sqlArgs = [args.qty, args.cartId, args.productId]
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+
+      if (result == undefined || result.length == 0)
+        throw errorNames.PRODUCT_DOES_NOT_EXIST
+      else
+        resolve(Cart.get(args))
+    })
+  })
+}
+
+/**
+ * Adds a product to the cart (or increases the quantity if it already exist in the cart)
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ * @param {!int}    args.productId - ID of the product to check
+ * @param {!int}    args.qty - The amount to offset the current quantity by (use rmvProduct instead of negatives)
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {CART_DOES_NOT_EXIST} Throws an error if cart cannot be found
+ * @throws {PRODUCT_DOES_NOT_EXIST} Throws an error if product cannot be found
+ * @returns {Promise&lt;Cart>} Returns the cart that contains the added / updated product quantity
+ */
+module.exports.addProduct = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId, args.productId, args.qty]))
+    throw errorNames.INVALID_PARAMS
+
+  if (args.qty &lt; 0) {
+    args.qty *= -1
+    return Cart.rmvProduct(args)
+  }
+
+  // if product is already in cart just update the entry
+  if (await Cart.productExistsInCart(args))
+    return await Cart.increaseQty(args)
+
+  if (!(await Cart.cartExists(args)))
+    throw errorNames.CART_DOES_NOT_EXIST
+
+  if (!(await Product.getProductById(args)))
+    throw errorNames.PRODUCT_DOES_NOT_EXIST
+
+  var sql = "INSERT INTO cart_product (cartId, productId, qty) VALUES (?, ?, ?)"
+  var sqlArgs = [args.cartId, args.productId, args.qty].map(mysql.escape)
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+
+      resolve(Cart.get(args))
+    })
+  })
+}
+
+/**
+ * Decreases the quantity of the product in the cart and removes the product if quantity reaches zero
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ * @param {!int}    args.productId - ID of the product to check
+ * @param {!int}    args.qty - The amount to offset the current quantity by (use addProduct instead of negatives)
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {CART_DOES_NOT_EXIST} Throws an error if cart cannot be found
+ * @throws {PRODUCT_DOES_NOT_EXIST} Throws an error if product cannot be found
+ * @returns {Promise&lt;Cart>} Returns the cart that contains the removed / updated product quantity
+ */
+module.exports.rmvProduct = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId, args.productId, args.qty]))
+    throw errorNames.INVALID_PARAMS
+
+  if (args.qty &lt; 0) {
+    args.qty *= -1
+    return Cart.addProduct(args)
+  }
+
+  if (!(await Cart.cartExists(args)))
+    throw errorNames.CART_DOES_NOT_EXIST
+
+  if (!(await Product.getProductById(args)))
+    throw errorNames.PRODUCT_DOES_NOT_EXIST
+
+  // if product is not in cart we can't reduce qty
+  var cartProduct = await Cart.productExistsInCart(args)
+  if (cartProduct) {
+    // don't want qty to be negative
+    if (args.qty >= cartProduct.qty) {
+      var sql = "DELETE FROM cart_product WHERE cartID = ? AND productID = ?"
+      var sqlArgs = [args.cartId, args.productId]
+
+      return new Promise( (resolve, reject) => {
+        args.conn.query(sql, sqlArgs, function(err, result) {
+          if (err) return reject(err)
+          resolve(Cart.get(args))
+        })
+      })
+    }
+    else return await Cart.decreaseQty(args)
+  }
+  else return Cart.get(args)
+}
+
+/**
+ * Removes all products from a cart
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {CART_DOES_NOT_EXIST} Throws an error if cart cannot be found
+ * @returns {Promise&lt;Cart>} Returns the cart that's been cleared
+ */
+module.exports.clear = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "DELETE FROM cart_product WHERE cartId = ?"
+  var sqlArgs = [args.cartId]
+
+  if (!(await Cart.cartExists(args)))
+    throw errorNames.CART_DOES_NOT_EXIST
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+
+      resolve(Cart.get(args))
+    })
+  })
+}
+
+/**
+ * Validates the cart by checking inventory.  If valid, decrease product inventories and clear the cart.
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {CART_DOES_NOT_EXIST} Throws an error if cart cannot be found
+ * @returns {Promise&lt;Boolean>} Returns true if succesful, or rejects with an error
+ */
+module.exports.delete = async(args) => {
+  await Cart.clear(args)
+
+  if (isNullOrUndefined([args, args.conn, args.cartId]))
+    throw errorNames.INVALID_PARAMS
+
+  var sql = "DELETE FROM cart WHERE id=?"
+  var sqlArgs = args.cartId
+
+  if (!(await Cart.cartExists(args)))
+    throw errorNames.CART_DOES_NOT_EXIST
+
+  return new Promise( (resolve, reject) => {
+    args.conn.query(sql, sqlArgs, function(err, result) {
+      if (err) return reject(err)
+      resolve(true)
+    })
+  })
+}
+
+/**
+ * Validates the cart by checking inventory.  If valid, decrease product inventories and clear the cart.
+ *
+ * @async
+ * @param {!object} args - Container object for all other params.
+ * @param {!string} args.conn - MySQL connection
+ * @param {!int}    args.cartId - ID of the cart to check
+ *
+ * @throws {INVALID_PARAMS} Throws an error if args does not contain required arguements
+ * @throws {EXCEEDS_INVENTORY} Throws an error if order quantity exceeds current inventory
+ * @returns {Promise&lt;Cart>} Returns the cart that's been checked out
+ */
+module.exports.checkout = async(args) => {
+  if (isNullOrUndefined([args, args.conn, args.cartId]))
+    throw errorNames.INVALID_PARAMS
+
+  var cart = await Cart.get(args)
+
+  for (let i=0; i&lt;cart.products.length; i++) {
+    let product = cart.products[i]
+    if (product.qty > product.inventory_count) {
+      throw errorNames.EXCEEDS_INVENTORY
+    }
+  }
+
+  for (let i=0; i&lt;cart.products.length; i++) {
+    let product = cart.products[i]
+    Product.decreaseInventory(args.conn, product.id, product.qty)
+  }
+
+  await Cart.delete(args)
+
+  return "Successfully checked out!!"
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <!-- <img class="logo" src="http://pluspng.com/img-png/shopify-logo-png--185.png" style="width: 150px; height: 150px"> -->
+    <div class="footer-text">Ethan Prentice - Carleton University</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "opts": {
+    "template": "node_modules/tui-jsdoc-template"
+  },
+  "templates": {
+      "name": "Shopify Marketplace",
+      "footerText": "Ethan Prentice - Carleton University",
+      "useCollapsibles": true,
+      "logo": {
+        "url": "http://pluspng.com/img-png/shopify-logo-png--185.png",
+        "width": "150px",
+        "height": "150px",
+        "link": "https://github.com/EthanPrentice"
+    },
+    "tabNames": {
+        "api": "API"
+    }
+  }
+}

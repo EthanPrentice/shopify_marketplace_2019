@@ -1,0 +1,2470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module: models/cart | Shopify Marketplace</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px; height: 150px">
+        
+            <a href="https://github.com/EthanPrentice" rel="noopener noreferrer" target="_blank">
+                <img src="http://pluspng.com/img-png/shopify-logo-png--185.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Shopify Marketplace</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-models_cart.html">models/cart</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:models/cart_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-models_cart.html#.addProduct">addProduct</a></li><li><a href="module-models_cart.html#.cartExists">cartExists</a></li><li><a href="module-models_cart.html#.checkout">checkout</a></li><li><a href="module-models_cart.html#.clear">clear</a></li><li><a href="module-models_cart.html#.create">create</a></li><li><a href="module-models_cart.html#.decreaseQty">decreaseQty</a></li><li><a href="module-models_cart.html#.get">get</a></li><li><a href="module-models_cart.html#.increaseQty">increaseQty</a></li><li><a href="module-models_cart.html#.productExistsInCart">productExistsInCart</a></li><li><a href="module-models_cart.html#.rmvProduct">rmvProduct</a></li></ul></div></li><li><a href="module-models_product.html">models/product</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:models/product_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-models_product.html#.decreaseInventory">decreaseInventory</a></li><li><a href="module-models_product.html#.getAllProducts">getAllProducts</a></li><li><a href="module-models_product.html#.getProductById">getProductById</a></li><li><a href="module-models_product.html#.getProductsById">getProductsById</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>models/cart</h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id=".addProduct">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>addProduct<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>, productId<span class="signature-attributes">non-null</span>, qty<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line190">line 190</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Adds a product to the cart (or increases the quantity if it already exist in the cart)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the product to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>qty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The amount to offset the current quantity by (use rmvProduct instead of negatives)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    <ul>
+            <li>
+
+    <div class="param-desc">
+    
+        CART_DOES_NOT_EXIST
+    
+    </div>
+
+</li>
+        
+            <li>
+
+    <div class="param-desc">
+    
+        PRODUCT_DOES_NOT_EXIST
+    
+    </div>
+
+</li>
+        </ul>
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that contains the added / updated product quantity
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".cartExists">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>cartExists<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; <span class="icon green">non-null</span> {boolean}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line20">line 20</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Checks if a cart exists in the database.
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to be validated.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">boolean</span>
+
+
+
+
+
+- True if cart exists, else false.
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".checkout">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>checkout<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line296">line 296</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Validates the cart by checking inventory.  If valid, decrease product inventories and clear the cart.
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        EXCEEDS_INVENTORY
+    
+    </div>
+
+
+        
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that's been checked out
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".clear">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>clear<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line271">line 271</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Removes all products from a cart
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        CART_DOES_NOT_EXIST
+    
+    </div>
+
+
+        
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that's been cleared
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".create">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>create<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line85">line 85</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Inserts a new, empty cart into the database
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Recently created cart
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".decreaseQty">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>decreaseQty<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>, productId<span class="signature-attributes">non-null</span>, qty<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line162">line 162</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Decreases the quantity of a product already contained in a cart
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the product to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>qty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The amount to offset the current quantity by (use increaseQty instead of negatives)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        PRODUCT_DOES_NOT_EXIST
+    
+    </div>
+
+
+        
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that contains the modified product quantity
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".get">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>get<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line46">line 46</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Retrieves a cart from the database.
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to be retrieved.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        CART_DOES_NOT_EXIST
+    
+    </div>
+
+
+        
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Cart with ID cartID, if does not exist throws error.
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".increaseQty">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>increaseQty<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>, productId<span class="signature-attributes">non-null</span>, qty<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line135">line 135</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Increases the quantity of a product already contained in a cart
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the product to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>qty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The amount to offset the current quantity by (use decreaseQty instead of negatives)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    
+            
+
+    <div class="param-desc">
+    
+        PRODUCT_DOES_NOT_EXIST
+    
+    </div>
+
+
+        
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that contains the modified product quantity
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".productExistsInCart">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>productExistsInCart<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>, productId<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Product|boolean}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line108">line 108</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Checks if a product is already in the cartUsed to decide whether to create a new entry when increasing quantities
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the product to check</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Product</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+
+
+
+- if the product exists, return it.  Else return false
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id=".rmvProduct">
+            
+                <span class="type-signature"><span class="icon green">static</span> </span>rmvProduct<span class="signature">(args<span class="signature-attributes">non-null</span>, conn<span class="signature-attributes">non-null</span>, cartId<span class="signature-attributes">non-null</span>, productId<span class="signature-attributes">non-null</span>, qty<span class="signature-attributes">non-null</span>)</span><span class="type-signature"> &rarr; {Cart}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="cart.js.html">cart.js</a></code>,
+                <code><a href="cart.js.html#line230">line 230</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Decreases the quantity of the product in the cart and removes the product if quantity reaches zero
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Container object for all other params.  Other params MUST be in this object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>conn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">MySQL connection</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cartId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the cart to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the product to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>qty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The amount to offset the current quantity by (use addProduct instead of negatives)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Throws:</h5>
+    <ul>
+            <li>
+
+    <div class="param-desc">
+    
+        CART_DOES_NOT_EXIST
+    
+    </div>
+
+</li>
+        
+            <li>
+
+    <div class="param-desc">
+    
+        PRODUCT_DOES_NOT_EXIST
+    
+    </div>
+
+</li>
+        </ul>
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Cart</span>
+
+
+
+
+
+- Returns the cart that contains the removed / updated product quantity
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="http://pluspng.com/img-png/shopify-logo-png--185.png" style="width: 150px; height: 150px">
+    <div class="footer-text">Ethan Prentice - Carleton University</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'module:models/cart_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home | Shopify Marketplace</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px; height: 150px">
+        
+            <a href="https://github.com/EthanPrentice" rel="noopener noreferrer" target="_blank">
+                <img src="http://pluspng.com/img-png/shopify-logo-png--185.png" width="100%" height="100%">
+            </a>
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Shopify Marketplace</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Cart.html">Cart</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Cart_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Cart.html#.addProduct">addProduct</a></li><li><a href="module-Cart.html#.cartExists">cartExists</a></li><li><a href="module-Cart.html#.checkout">checkout</a></li><li><a href="module-Cart.html#.clear">clear</a></li><li><a href="module-Cart.html#.create">create</a></li><li><a href="module-Cart.html#.decreaseQty">decreaseQty</a></li><li><a href="module-Cart.html#.delete">delete</a></li><li><a href="module-Cart.html#.get">get</a></li><li><a href="module-Cart.html#.increaseQty">increaseQty</a></li><li><a href="module-Cart.html#.productExistsInCart">productExistsInCart</a></li><li><a href="module-Cart.html#.rmvProduct">rmvProduct</a></li></ul></div></li><li><a href="module-Errors.html">Errors</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Errors_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Errors.html#.errorNames">errorNames</a></li><li><a href="module-Errors.html#.errorTypes">errorTypes</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Errors.html#.getError">getError</a></li></ul></div></li><li><a href="module-Product.html">Product</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Product_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Product.html#.decreaseInventory">decreaseInventory</a></li><li><a href="module-Product.html#.getAllProducts">getAllProducts</a></li><li><a href="module-Product.html#.getProductById">getProductById</a></li><li><a href="module-Product.html#.getProductsById">getProductsById</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#root">root</a></li><li><a href="global.html#schema">schema</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section>
+        <article class="readme"><h1>Shopify Marketplace</h1><p>A slick, new, cutting edge API that implements GraphQL and runs on NodeJS.</p>
+<p>Developed as a part of the application process for Backend Developer Intern at Shopify for the Summer of 2019.</p>
+<p>Note that this has only been tested using NodeJS 8.11, MySQL 5.7 and Windows 10.</p>
+<h2>Installation</h2><p>Must have MySQL, NodeJS and NPM already installed and in PATH.</p>
+<p>Create a new schema called marketplace (you can call it whatever you want but will need to change db_name in config/db_schema.json).</p>
+<p>Run the sql commands located in init_db.sql to create tables and insert some test products.</p>
+<p>Change the parameters in config/db_auth.json to match your own credentials.
+The database user will only need read/write permissions to marketplace (other than creating the schema and init_db.sql).</p>
+<p>Install all required npm modules in package.json:</p>
+<pre class="prettyprint source lang-bash"><code>npm install</code></pre><h2>Documentation</h2><p>If you're viewing this on GitHub the documentation is located <a href="out/index.html">here</a>.</p>
+<p>If you're viewing this in the doc files, great job! You're already here!</p>
+<p>To generate updated documentation after any changes run:</p>
+<pre class="prettyprint source lang-bash"><code>jsdoc -c config/jsdoc_conf.json -R README.md server.js modules/errors.js modules/cart.js modules/product.js.</code></pre><h2>Usage</h2><p>To start the server on localhost:3000/graphql run one of the following in the command line:</p>
+<pre class="prettyprint source lang-bash"><code>npm start
+node server.js</code></pre><h2>Testing</h2><p>There are test queries located in query_template.sql that can be copy/pasted into GraphIQL.</p>
+<p>Note that there are no currently provided unit tests, however you can change around the template to do all available queries and mutations.  There are errors coded into errors.js that should be thrown when items are unavailable or invalid arguements are provided.
+Since GraphIQL is a nice interface and easy to use, I found verbose unit tests to be too time consuming for a small project.</p>
+<h2>GraphQL Schema</h2><p>I didn't know where to include this in the documentation so here's the GraphQL schema:</p>
+<pre class="prettyprint source lang-schema"><code>type Query {
+  getCart(cartId: Int!): Cart
+  allProducts: [Product]!
+  getProduct(productId: Int!): Product
+}
+
+type Mutation {
+  createCart: Cart
+  addProductToCart(cartId: Int! productId: Int!, qty: Int!): Cart
+  rmvProductFromCart(cartId: Int!, productId: Int!, qty: Int!): Cart
+  clearCart(cartId: Int!): Cart
+  checkoutCart(cartId: Int!): String
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Int!
+  inventory_count: Int!
+
+  qty: Int                # used when product is in cart
+  subtotal: Int           # used when product is in cart
+}
+
+type Cart {
+  id: Int!
+  products: [Product]!
+  totalPrice: Int!
+}
+
+type Error {
+  errors: [String!]!
+}</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<footer>
+    <!-- <img class="logo" src="http://pluspng.com/img-png/shopify-logo-png--185.png" style="width: 150px; height: 150px"> -->
+    <div class="footer-text">Ethan Prentice - Carleton University</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'package:undefined_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
