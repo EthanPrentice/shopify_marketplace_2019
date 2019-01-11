@@ -28,6 +28,8 @@ If you're viewing this on GitHub the documentation is located [here](http://html
 
 If you're viewing this in the doc files, great job! You're already here!
 
+Since the documentation is hosted on GitHub the JS isn't loaded and scrolling using the mouse wheel and some collapsable links may not work as expected.
+
 To generate updated documentation after any changes run:
 ```bash
 jsdoc -c config/jsdoc_conf.json -R README.md server.js modules/errors.js modules/cart.js modules/product.js.
