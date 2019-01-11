@@ -24,7 +24,7 @@ npm install
 
 ## Documentation
 
-If you're viewing this on GitHub the documentation is located [here](out/index.html).
+If you're viewing this on GitHub the documentation is located [here](http://htmlpreview.github.io/?https://github.com/EthanPrentice/shopify_marketplace_2019/blob/master/out/index.html).
 
 If you're viewing this in the doc files, great job! You're already here!
 
