@@ -66,8 +66,10 @@
 <p>Change the parameters in config/db_auth.json to match your own credentials.
 The database user will only need read/write permissions to marketplace (other than creating the schema and init_db.sql).</p>
 <p>Install all required npm modules in package.json:</p>
-<pre class="prettyprint source lang-bash"><code>npm install</code></pre><h2>Documentation</h2><p>If you're viewing this on GitHub the documentation is located <a href="out/index.html">here</a>.</p>
+<pre class="prettyprint source lang-bash"><code>npm install</code></pre><h2>Documentation</h2><p>If you're viewing this on GitHub the documentation is located <a href="http://htmlpreview.github.io/?https://github.com/EthanPrentice/shopify_marketplace_2019/blob/master/out/index.html">here</a>.</p>
 <p>If you're viewing this in the doc files, great job! You're already here!</p>
+<p>Since the documentation is hosted on GitHub the JS isn't loaded and scrolling using the mouse wheel and some collapsable links may not work as expected.</p>
+<p>I recommend that if you download the files to open the documentation locally in out/index.html</p>
 <p>To generate updated documentation after any changes run:</p>
 <pre class="prettyprint source lang-bash"><code>jsdoc -c config/jsdoc_conf.json -R README.md server.js modules/errors.js modules/cart.js modules/product.js.</code></pre><h2>Usage</h2><p>To start the server on localhost:3000/graphql run one of the following in the command line:</p>
 <pre class="prettyprint source lang-bash"><code>npm start
