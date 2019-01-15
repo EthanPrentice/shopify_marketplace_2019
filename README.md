@@ -1,6 +1,6 @@
 # Shopify Marketplace
 
-A slick, new, cutting edge API that implements GraphQL and runs on NodeJS.
+An slick new API that implements GraphQL and runs on NodeJS to manage carts and product inventories.
 
 Developed as a part of the application process for Backend Developer Intern at Shopify for the Summer of 2019.
 
